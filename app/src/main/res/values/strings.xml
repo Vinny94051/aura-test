@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">aura-test</string>
+    <string name="notification_text_no_boots_detected">No boots detected</string>
+    <string name="notification_text_one_boot_detected">The boot was detected = %s</string>
 </resources>
