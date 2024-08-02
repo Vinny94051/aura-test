@@ -9,8 +9,8 @@
 # What done
 
 1. Saving data into DB with Room
-2. Handling BOOT event via BroadCastReciver
-3. Handling event Cancel btn via BroadCastReciver
+2. Handling BOOT event via BroadcastReciver
+3. Handling event Cancel btn via BroadcastReciver
 4. Scheduling task via WorkManager for every 15 minutes, also added imidiate displaying of notification when event triggered
 5. Set up max cancellation attempts via EditText and Button
 6. Increase time interval of notification if current "cancel" btn clicked > allowed number
