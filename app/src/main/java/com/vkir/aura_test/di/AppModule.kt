@@ -4,11 +4,15 @@ import android.content.Context
 import androidx.room.Room
 import com.vkir.aura_test.presentation.notification.BootNotificationManager
 import com.vkir.aura_test.data.AuraTestDatabase
+import com.vkir.aura_test.data.CancelClickedNumberPrefs
+import com.vkir.aura_test.data.CancellationsNumberPrefs
 import com.vkir.aura_test.data.EventsInfoDao
 import com.vkir.aura_test.domain.NotificationTextProvider
 import com.vkir.aura_test.domain.NotificationTextProviderImpl
 import com.vkir.aura_test.domain.SaveEventInfoUseCase
 import com.vkir.aura_test.domain.SaveEventInfoUseCaseImpl
+import com.vkir.aura_test.presentation.MainActivityViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
@@ -28,4 +32,12 @@ val appModule = module {
     single { BootNotificationManager(get()) }
 
     factory<NotificationTextProvider> { NotificationTextProviderImpl(get(), get()) }
+
+    single { CancellationsNumberPrefs(get()) }
+
+    single { CancelClickedNumberPrefs(get()) }
+
+    viewModel {
+        MainActivityViewModel(get())
+    }
 }

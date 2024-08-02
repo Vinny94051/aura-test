@@ -12,6 +12,7 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.vkir.aura_test.presentation.work_mangers.BootNotificationWorker
 import com.vkir.aura_test.presentation.work_mangers.SaveBootEventInfoWorker
+import java.util.UUID
 import java.util.concurrent.TimeUnit.MINUTES
 
 class DeviceBootBroadCastReceiver : BroadcastReceiver() {
@@ -19,6 +20,8 @@ class DeviceBootBroadCastReceiver : BroadcastReceiver() {
     companion object {
 
         private const val DEFAULT_NOTIFICATION_PERIOD_IN_MIN = 15L
+
+        const val REQUEST_ID = "6578"
     }
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -35,13 +38,16 @@ class DeviceBootBroadCastReceiver : BroadcastReceiver() {
     }
 
     private fun setupNotificationTask(context: Context) {
-        val workRequest = OneTimeWorkRequestBuilder<BootNotificationWorker>().build()
+        val workRequest = OneTimeWorkRequestBuilder<BootNotificationWorker>()
+            .build()
         WorkManager.getInstance(context).enqueue(workRequest)
 
         val notificationWorkRequest = PeriodicWorkRequestBuilder<BootNotificationWorker>(
             repeatInterval = DEFAULT_NOTIFICATION_PERIOD_IN_MIN,
             repeatIntervalTimeUnit = MINUTES
-        ).build()
+        )
+            .setId(UUID.fromString(REQUEST_ID))
+            .build()
 
         WorkManager.getInstance(context).enqueue(notificationWorkRequest)
     }
